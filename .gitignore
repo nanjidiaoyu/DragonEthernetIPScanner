@@ -1,0 +1,45 @@
+# .NET 编译产物
+bin/
+obj/
+out/
+artifacts/
+*.nupkg
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+.vscode/
+
+# 用户本地配置（不入库）
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# 测试与覆盖率
+TestResults/
+[Ll]ogs/
+*.coverage
+*.trx
+
+# 发布目录
+[Rr]elease/
+[Dd]ebug/
+[Pp]ublish/
+
+# NuGet
+*.snupkg
+packages/
+
+# 操作系统文件
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# 日志与临时文件
+*.log
+*.tmp
+
+# ODVA 协议规范 PDF（体积大且有版权限制，仅保留在本地）
+doc/

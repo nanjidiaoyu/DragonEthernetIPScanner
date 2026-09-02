@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DragonEthernetIP", "src\DragonEthernetIP\DragonEthernetIP.csproj", "{2AF52DF9-6096-F489-72E7-7CCFD8C03A20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExplicitMessagingExample", "example\ExplicitMessagingExample\ExplicitMessagingExample.csproj", "{5C2BE217-7A59-1DE2-B978-E85478081D0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityObjectExample", "example\IdentityObjectExample\IdentityObjectExample.csproj", "{2D0F0BFE-C23D-7ACC-9222-3D207F5189DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImplicitMessagingExample", "example\ImplicitMessagingExample\ImplicitMessagingExample.csproj", "{D3C8AC34-7038-4454-DBE6-D6B9B39D0288}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2AF52DF9-6096-F489-72E7-7CCFD8C03A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AF52DF9-6096-F489-72E7-7CCFD8C03A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AF52DF9-6096-F489-72E7-7CCFD8C03A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AF52DF9-6096-F489-72E7-7CCFD8C03A20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C2BE217-7A59-1DE2-B978-E85478081D0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C2BE217-7A59-1DE2-B978-E85478081D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C2BE217-7A59-1DE2-B978-E85478081D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C2BE217-7A59-1DE2-B978-E85478081D0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D0F0BFE-C23D-7ACC-9222-3D207F5189DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D0F0BFE-C23D-7ACC-9222-3D207F5189DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D0F0BFE-C23D-7ACC-9222-3D207F5189DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D0F0BFE-C23D-7ACC-9222-3D207F5189DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3C8AC34-7038-4454-DBE6-D6B9B39D0288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3C8AC34-7038-4454-DBE6-D6B9B39D0288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3C8AC34-7038-4454-DBE6-D6B9B39D0288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3C8AC34-7038-4454-DBE6-D6B9B39D0288}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09CE3698-FD31-4167-8713-C2E5054F6C71}
+	EndGlobalSection
+EndGlobal
