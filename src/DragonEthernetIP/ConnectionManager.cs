@@ -20,7 +20,7 @@ namespace DragonEthernetIP
     public class ConnectionManager
     {
         private ConcurrentDictionary<string, ConcurrentDictionary<uint, IOConnection>> iOConnectionDics = new ConcurrentDictionary<string, ConcurrentDictionary<uint, IOConnection>>();
-        private Dictionary<uint, UdpClient> udpClientDics = new Dictionary<uint, UdpClient>();
+        private List<uint> multicastAddressList = new List<uint>();
         private Dictionary<string, Task> taskDic = new Dictionary<string, Task>();
         private ConcurrentDictionary<string, ConcurrentBag<IOConnection>> reTryConcurrentBag = new();
         private MessageRouter _messageRouter;
@@ -29,6 +29,8 @@ namespace DragonEthernetIP
         private CancellationToken cancellationToken = default;
         private Task reconnectTask = null;
         private readonly ILogger _logger;
+        private UdpClient scannerUdpClient = null;
+        private IPEndPoint scannerEndPointReceive = null;
         public ConnectionManager(string localIpAddress, ILogger logger = null)
         {
             _localIpAddress = localIpAddress;
@@ -127,30 +129,35 @@ namespace DragonEthernetIP
                 ioConnection.TargetEndPoint = endPoint;
             }
             uint multicastAddress = 0;
-            if (t2oNCP.GetConnectionType() == ConnectionType.MULTICAST && t2oSockAddrInfo != null)
+            if (t2oSockAddrInfo != null)
             {
                 DragonBuffer sockAddrBuffer = new DragonBuffer(t2oSockAddrInfo.GetData());
                 DragonEndPoint endPoint = sockAddrBuffer.ReadEndPoint();
                 ioConnection.SourcetEndPoint = endPoint;
-                multicastAddress = endPoint.SIN_Address;
+                if (t2oNCP.GetConnectionType() == ConnectionType.MULTICAST)
+                {
+                    multicastAddress = endPoint.SIN_Address;
+                }
             }
-
-            if (!udpClientDics.ContainsKey(multicastAddress))
+            if (scannerUdpClient == null)
             {
                 var localIPaddr = System.Net.IPAddress.Parse(this._localIpAddress);
-                System.Net.IPEndPoint endPointReceive = new System.Net.IPEndPoint(localIPaddr, DragonEndPoint.EIP_DEFAULT_IMPLICIT_PORT);//建议绑定到具体IP地址，不要使用Any
-                UdpClient udpClient = new UdpClient(endPointReceive);
+                scannerEndPointReceive = new System.Net.IPEndPoint(localIPaddr, DragonEndPoint.EIP_DEFAULT_IMPLICIT_PORT);//建议绑定到具体IP地址，不要使用Any
+                scannerUdpClient = new UdpClient(scannerEndPointReceive);
+            }
+            if (!multicastAddressList.Contains(multicastAddress))
+            {
                 if (multicastAddress != 0)
                 {
                     System.Net.IPAddress multicast = new System.Net.IPAddress(multicastAddress);
-                    udpClient.JoinMulticastGroup(multicast);
+                    scannerUdpClient.JoinMulticastGroup(multicast);
                 }
-                udpClientDics.Add(multicastAddress, udpClient);
+                multicastAddressList.Add(multicastAddress);
                 UdpState s = new UdpState();
-                s.e = endPointReceive;
-                s.u = udpClient;
+                s.e = scannerEndPointReceive;
+                s.u = scannerUdpClient;
                 s.sessionIP = sessionInfo.Host;
-                var asyncResult = udpClient.BeginReceive(new AsyncCallback(ReceiveCallbackClass1), s);
+                var asyncResult = scannerUdpClient.BeginReceive(new AsyncCallback(ReceiveCallbackClass1), s);
             }
             if (this.iOConnectionDics.TryGetValue(sessionInfo.Host, out var localDic))
             {
